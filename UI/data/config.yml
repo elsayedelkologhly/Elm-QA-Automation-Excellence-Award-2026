@@ -1,0 +1,101 @@
+﻿# ==================================================================
+# USER INPUT DATA - Captured from E2E test execution
+# ==================================================================
+
+# Login Credentials
+USERNAME: '1011194865'
+PASSWORD: '1234@Qwe'
+CAPTCHA_CODE: '12345'
+CAPTCHA: '12345'
+
+# OTP Verification (user entered)
+OTP_CODE: '12345'
+
+# ==================================================================
+# AUCTION CREATION DATA - E2E Test Data
+# ==================================================================
+
+# Form 1: Basic Information
+AUCTION_CATEGORY: مزاد عقار
+AUCTION_TYPE: مزاد إلكتروني
+
+# Form 2: Asset Details
+AUCTION_NAME: فيلا سكنية فاخرة
+PROPERTY_TYPE: فيلا
+PROPERTY_PURPOSE: سكني
+PROPERTY_AREA: 500
+DEED_NUMBER: 123456789/7/8
+ASSET_DESCRIPTION: فيلا سكنية فاخرة تقع في حي راقي بمدينة الرياض، تتميز بموقع استراتيجي ممتاز
+
+# Form 3: Attachments
+MAIN_IMAGE_PATH: test_asset_main.jpg
+ADDITIONAL_IMAGE_1_PATH: test_asset_1.jpg
+ADDITIONAL_IMAGE_2_PATH: test_asset_2.jpg
+ADDITIONAL_IMAGE_3_PATH: test_asset_3.jpg
+
+# Form 4: Location Details
+REGION: الرياض
+CITY: الرياض
+DISTRICT: حي النرجس
+STREET_WIDTH: 20
+FACADE_DIRECTION: شمالية
+BOUNDARY_NORTH: شارع عام 15 متر
+BOUNDARY_NORTH_LENGTH: 25 متر
+BOUNDARY_SOUTH: شارع فرعي 10 متر
+BOUNDARY_SOUTH_LENGTH: 25 متر
+BOUNDARY_EAST: فيلا سكنية
+BOUNDARY_EAST_LENGTH: 20 متر
+BOUNDARY_WEST: فيلا سكنية
+BOUNDARY_WEST_LENGTH: 20 متر
+
+# Form 5: Auction Timing
+START_TIME: '10:00'
+END_TIME: '14:00'
+START_DATE_DAY: 20
+START_DATE_MONTH: 12
+START_DATE_YEAR: 2025
+END_DATE_DAY: 20
+END_DATE_MONTH: 12
+END_DATE_YEAR: 2025
+
+# Form 6: Financial Information
+ESTIMATED_PRICE: 2000000
+DEPOSIT_AMOUNT: 100000
+OPENING_PRICE: 1800000
+MIN_BID_INCREMENT: 10000
+VAT_CALCULATION_METHOD: إجمالي مبلغ المزاد
+
+# Auto-Calculated Values (for verification)
+EXPECTED_PRICE_PER_METER: '3,600'
+EXPECTED_COMMISSION: '45,000'
+EXPECTED_VAT: '6,750'
+
+# Form 7: Agent Information
+SHOW_AGENT_INFO: false
+
+# Form 8: Additional Information (Custom Fields)
+CUSTOM_FIELD_1_NAME: عدد الغرف
+CUSTOM_FIELD_1_VALUE: 5 غرف
+CUSTOM_FIELD_2_NAME: عدد دورات المياه
+CUSTOM_FIELD_2_VALUE: 4 دورات
+
+# ==================================================================
+# GROUP CREATION DATA - Legacy Test Data
+# ==================================================================
+GROUP_NAME: Test Group 2025
+GROUP_IMAGE_PATH: C:\\Users\\skoroghly\\Downloads\\New folder (2)\\test_group_image.jpg
+
+# ==================================================================
+# ENVIRONMENT CONFIGURATION - System settings
+# ==================================================================
+BASE_URL: https://salesagent-staging.emazad.sa
+BROWSER: chromium
+HEADLESS: false
+TIMEOUT: 30
+SLOW_MO: 1000
+
+# ==================================================================
+# VALIDATION DATA - Expected messages
+# ==================================================================
+EXPECTED_SUCCESS_MESSAGE: Successfully logged in
+EXPECTED_ERROR_MESSAGE: Invalid credentials

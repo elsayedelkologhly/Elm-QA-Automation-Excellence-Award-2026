@@ -1,0 +1,11 @@
+**/results/
+**/reports/
+**/log.html
+**/report.html
+**/output.xml
+**/playwright-log.txt
+**/*.har
+**/traces/
+.playwright-mcp/
+**/__pycache__/
+*.py[cod]

@@ -1,0 +1,6 @@
+# Core Robot Framework dependencies for API automation
+robotframework==6.1.1
+robotframework-requests==0.9.4
+
+# Additional utilities
+requests==2.31.0
