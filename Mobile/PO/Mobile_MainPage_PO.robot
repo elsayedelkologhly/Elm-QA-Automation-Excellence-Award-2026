@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../../Keyword/MobileKeywords/MobileCommonKeyword.robot
+Resource    ../Keywords/MobileCommonKeyword.robot
 Library    AppiumLibrary
 
 *** Keywords ***

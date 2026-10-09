@@ -2,7 +2,6 @@
 Library     robot.libraries.DateTime
 Library      Collections
 Library    AppiumLibrary
-Variables  ../../../Resources/Project_Configration/Test_Configration.yaml
 
 
 

@@ -2,9 +2,9 @@
 *** Settings ***
 Documentation    Suite login test cases
 Library    AppiumLibrary
-Resource    ../../Resources/PO/MobilePO/Mobile_MainPage_PO.robot
-Resource    ../../Resources/PO/MobilePO/Mobile_LoginPage_PO.robot
-Resource    ../../Resources/Keyword/MobileKeywords/MobileCommonKeyword.robot
+Resource    ../../PO/Mobile_MainPage_PO.robot
+Resource    ../../PO/Mobile_LoginPage_PO.robot
+Resource    ../../Keywords/MobileCommonKeyword.robot
 Suite Setup  Start Android Application
 Test Teardown     Capture Page Screenshot
 Suite Teardown     End Application
