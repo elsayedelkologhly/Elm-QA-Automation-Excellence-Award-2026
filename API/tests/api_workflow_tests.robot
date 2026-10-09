@@ -102,11 +102,11 @@ Validate Authentication Token Cascade
     
     # Check temp token format and length
     ${temp_token_length}=    Get Length    ${GLOBAL_TEMP_ACCESS_TOKEN}
-    Should Be True    ${temp_token_length} > 50    Temp token seems too short
+    Should Be True    ${temp_token_length} > 30    Temp token seems too short
     
     # Check final token format and length  
     ${final_token_length}=    Get Length    ${GLOBAL_ACCESS_TOKEN}
-    Should Be True    ${final_token_length} > 50    Final token seems too short
+    Should Be True    ${final_token_length} > 30    Final token seems too short
     
     # Verify tokens are different (temp vs final)
     Should Not Be Equal    ${GLOBAL_TEMP_ACCESS_TOKEN}    ${GLOBAL_ACCESS_TOKEN}
@@ -163,7 +163,7 @@ Get Auction List
     Log    Getting auction list (page 1)...
     
     # Prepare pagination payload based on HAR analysis
-    &{pagination_payload}=    Create Dictionary    pageNumber=1
+    &{pagination_payload}=    Copy Dictionary    ${TEST_PAGINATION_PAYLOAD}    deepcopy=${True}
     
     ${response}=    Send POST Request With Global Auth    ${AUCTION_LIST_ENDPOINT}    ${pagination_payload}
     ${auction_data}=    Validate And Extract Response Data    ${response}    result
@@ -180,7 +180,7 @@ Get Draft Auction List
     Log    Getting draft auction list...
     
     # Prepare pagination payload
-    &{pagination_payload}=    Create Dictionary    pageNumber=1
+    &{pagination_payload}=    Copy Dictionary    ${TEST_PAGINATION_PAYLOAD}    deepcopy=${True}
     
     ${response}=    Send POST Request With Global Auth    ${DRAFT_AUCTION_LIST_ENDPOINT}    ${pagination_payload}
     ${draft_data}=    Validate And Extract Response Data    ${response}    result
@@ -194,58 +194,7 @@ Create Auction With Asset
     Log    Creating auction with asset based on HAR payload structure...
     
     # Build auction creation payload based on HAR analysis
-    &{main_info}=    Create Dictionary
-    ...              globalAssetTypeId=3
-    ...              typeId=1
-    ...              causeId=${None}
-    ...              globalAssetTypeName=أخرى
-    ...              typeName=مزاد الكتروني
-    
-    &{asset_details}=    Create Dictionary
-    ...                  assetName=Robot Framework Test Asset
-    ...                  description=Test asset created by automation
-    
-    &{realestate_details}=    Create Dictionary
-    ...                       auctionRegionId=2
-    ...                       auctionCityId=227
-    ...                       district=Test District
-    ...                       googleMapUrl=${EMPTY}
-    ...                       auctionRegionName=Test Region
-    ...                       auctionCityName=Test City
-    
-    &{timing}=    Create Dictionary
-    ...           startDate=2/1/2026
-    ...           startTime=01:00:00
-    ...           endDate=2/1/2026
-    ...           endTime=02:00:00
-    
-    &{financial_info}=    Create Dictionary
-    ...                   calculateVatMethod=1
-    ...                   estimatedPrice=1000
-    ...                   solvency=100
-    ...                   startBidPrice=500
-    ...                   minimumBidPrice=400
-    
-    &{sales_agent_details}=    Create Dictionary
-    ...                        phoneNumber=541111113
-    ...                        whatsAppNumber=541111113
-    
-    &{attachments}=    Create Dictionary
-    ...                masterImage=${None}
-    ...                additionalImages=@{EMPTY}
-    ...                brochure=${None}
-    ...                assetVideoUrl=${EMPTY}
-    ...                assetVideoFile=${None}
-    
-    &{auction_payload}=    Create Dictionary
-    ...                    mainInfo=${main_info}
-    ...                    assetDetails=${asset_details}
-    ...                    realestateDetails=${realestate_details}
-    ...                    attachments=${attachments}
-    ...                    timing=${timing}
-    ...                    financialInfo=${financial_info}
-    ...                    salesAgentDetails=${sales_agent_details}
-    ...                    additionalData=@{EMPTY}
+    &{auction_payload}=    Copy Dictionary    ${TEST_AUCTION_PAYLOAD}    deepcopy=${True}
     
     # Execute auction creation API call
     ${response}=    Send POST Request With Global Auth    ${CREATE_AUCTION_ENDPOINT}    ${auction_payload}

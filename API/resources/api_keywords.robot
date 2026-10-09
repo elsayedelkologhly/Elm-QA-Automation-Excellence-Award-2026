@@ -2,7 +2,9 @@
 Documentation    Core API interaction keywords for E-Mazad platform
 Library          RequestsLibrary
 Library          Collections
-
+Resource         ../variables/api_config.robot
+Resource         ../variables/global_variables.robot
+Resource            authentication_keywords.robot
 *** Keywords ***
 Setup API Test Suite
     [Documentation]     CRITICAL: Initialize API test suite with E-Mazad authentication
@@ -171,66 +173,10 @@ Create Auction With Asset
     ${short_asset_name}=    Set Variable    ${asset_name[:14]}
     
     # Build auction payload matching EXACT HAR structure  
-    ${main_info}=    Create Dictionary
-    ...    globalAssetTypeId=3
-    ...    typeId=1
-    ...    causeId=${None}
-    ...    globalAssetTypeName=أخرى
-    ...    typeName=مزاد الكتروني
-    
-    ${asset_details}=    Create Dictionary
+    ${auction_payload}=    Copy Dictionary    ${HAR_AUCTION_PAYLOAD}    deepcopy=${True}
+    Set To Dictionary    ${auction_payload}[assetDetails]
     ...    assetName=${short_asset_name}
     ...    description=${description}
-    
-    ${realestate_details}=    Create Dictionary
-    ...    auctionRegionId=2
-    ...    auctionCityId=227
-    ...    district=11
-    ...    googleMapUrl=${EMPTY}
-    ...    auctionRegionName=الجوف
-    ...    auctionCityName=طبرجل
-    
-    ${timing}=    Create Dictionary
-    ...    startDate=1/21/2026
-    ...    startTime=01:00:00
-    ...    endDate=1/21/2026
-    ...    endTime=01:00:00
-    
-    ${financial_info}=    Create Dictionary
-    ...    calculateVatMethod=1
-    ...    estimatedPrice=11
-    ...    solvency=11
-    ...    startBidPrice=11
-    ...    minimumBidPrice=10
-    
-    ${sales_agent_details}=    Create Dictionary
-    ...    phoneNumber=541111113
-    ...    whatsAppNumber=541111113
-    
-    # ⚠️ CRITICAL: Use EXACT master image from working HAR request
-    ${master_image}=    Create Dictionary
-    ...    url=https://storage.googleapis.com/gcp-mazad-preprod/a98d39ed-d4da-40eb-884f-66793a886bb0
-    ...    fileId=a98d39ed-d4da-40eb-884f-66793a886bb0
-    ...    name=6760135001_58b1c5c5f0_b.jpg
-    ...    size=${102614}
-    
-    ${attachments}=    Create Dictionary
-    ...    masterImage=${master_image}
-    ...    additionalImages=@{EMPTY}
-    ...    brochure=${None}
-    ...    assetVideoUrl=${EMPTY}
-    ...    assetVideoFile=${None}
-    
-    # Combine all sections into final payload (note: mainInfo not basic_info)
-    ${auction_payload}=    Create Dictionary
-    ...    mainInfo=${main_info}
-    ...    assetDetails=${asset_details}
-    ...    realestateDetails=${realestate_details}
-    ...    timing=${timing}
-    ...    financialInfo=${financial_info}
-    ...    salesAgentDetails=${sales_agent_details}
-    ...    attachments=${attachments}
-    ...    additionalData=@{EMPTY}
     
     Log    📝 Asset name shortened to: ${short_asset_name} (${short_asset_name.__len__()} chars)
     Log    📝 Created auction payload: ${auction_payload}
@@ -262,18 +208,16 @@ Create Auction With Asset
 
 Get Auction List With Pagination
     [Documentation]    Get list of auctions with proper response structure parsing
-    [Arguments]    ${take_count}=10    ${skip_count}=0
+    [Arguments]    ${take_count}=${TEST_PAGE_TAKE_COUNT}    ${skip_count}=${TEST_PAGE_SKIP_COUNT}
     
     # Build pagination payload
-    ${pagination_payload}=    Create Dictionary
+    ${pagination_payload}=    Copy Dictionary    ${TEST_OFFSET_PAGINATION_PAYLOAD}    deepcopy=${True}
+    Set To Dictionary    ${pagination_payload}
     ...    take=${take_count}
     ...    skip=${skip_count}
-    ...    filter=${EMPTY}
-    ...    sortBy=${EMPTY}
-    ...    ascending=${True}
     
     # Execute API call
-    ${response}=    Send POST Request With Global Auth    ${GET_AUCTION_LIST_ENDPOINT}    ${pagination_payload}
+    ${response}=    Send POST Request With Global Auth    ${AUCTION_LIST_ENDPOINT}    ${pagination_payload}
     ${auction_data}=    Validate And Extract Response Data    ${response}    result
     
     # Parse the nested result structure: result.totalCount and result.items

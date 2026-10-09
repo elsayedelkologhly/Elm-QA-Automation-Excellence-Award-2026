@@ -2,7 +2,8 @@
 Documentation    Authentication and token management keywords based on HAR analysis
 Library          RequestsLibrary
 Library          Collections
-
+Resource         ../variables/api_config.robot
+Resource         ../variables/global_variables.robot
 *** Keywords ***
 Extract And Store Global Authentication
     [Documentation]     CRITICAL: Complete E-Mazad authentication flow with 2xx validation
@@ -30,7 +31,7 @@ Perform Initial Login
     &{captcha_data}=    Create Dictionary    
     ...                isInternalLoging=${False}
     ...                captcha=${TEST_CAPTCHA}
-    ...                captchaToken=test-token-123
+    ...                captchaToken=${TEST_CAPTCHA_TOKEN}
     
     # Prepare login payload based on HAR data structure
     &{login_payload}=    Create Dictionary    

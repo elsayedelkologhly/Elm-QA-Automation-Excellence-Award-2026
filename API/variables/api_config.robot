@@ -23,6 +23,7 @@ ${USERNAME}              1174202257
 ${PASSWORD}              1234@Qwe
 ${TEST_CAPTCHA}          12345
 ${TEST_OTP}              11111
+${TEST_CAPTCHA_TOKEN}    test-token-123
 
 # API field mapping (from HAR request payloads)
 ${USERNAME_FIELD}        userNameOrEmailAddress
@@ -51,3 +52,119 @@ ${AUCTION_REGIONS_ENDPOINT}       /web/emazad/Auctions/GetAuctionRegionsSelectLi
 
 # Financial/Calculation APIs
 ${PRICE_CALCULATION_ENDPOINT}     /web/emazad/AuctionCalculation/GetPricesAsync
+
+&{TEST_PAGINATION_PAYLOAD}    pageNumber=1
+
+&{TEST_AUCTION_MAIN_INFO}
+...    globalAssetTypeId=3
+...    typeId=1
+...    causeId=${None}
+...    globalAssetTypeName=أخرى
+...    typeName=مزاد الكتروني
+
+&{TEST_AUCTION_ASSET_DETAILS}
+...    assetName=Robot Framework Test Asset
+...    description=Test asset created by automation
+
+&{TEST_AUCTION_REALESTATE_DETAILS}
+...    auctionRegionId=2
+...    auctionCityId=227
+...    district=Test District
+...    googleMapUrl=${EMPTY}
+...    auctionRegionName=Test Region
+...    auctionCityName=Test City
+
+&{TEST_AUCTION_TIMING}
+...    startDate=20/10/2026
+...    startTime=01:00:00
+...    endDate=21/10/2026
+...    endTime=02:00:00
+
+&{TEST_AUCTION_FINANCIAL_INFO}
+...    calculateVatMethod=1
+...    estimatedPrice=1000
+...    solvency=100
+...    startBidPrice=500
+...    minimumBidPrice=400
+
+&{TEST_AUCTION_SALES_AGENT_DETAILS}
+...    phoneNumber=541111113
+...    whatsAppNumber=541111113
+
+&{TEST_AUCTION_MASTER_IMAGE}
+...    url=https://storage.googleapis.com/gcp-mazad-preprod/750b1b28-ee6c-4504-ad90-f8c499a49a01
+...    fileId=750b1b28-ee6c-4504-ad90-f8c499a49a01
+...    name=jpg - Copy (2).jpg
+...    size=${18710}
+@{TEST_AUCTION_ADDITIONAL_IMAGES}
+
+&{TEST_AUCTION_ATTACHMENTS}
+...    masterImage=${TEST_AUCTION_MASTER_IMAGE}
+...    additionalImages=${TEST_AUCTION_ADDITIONAL_IMAGES}
+...    brochure=${None}
+...    assetVideoUrl=${EMPTY}
+...    assetVideoFile=${None}
+
+@{TEST_AUCTION_ADDITIONAL_DATA}
+&{TEST_AUCTION_PAYLOAD}
+...    mainInfo=${TEST_AUCTION_MAIN_INFO}
+...    assetDetails=${TEST_AUCTION_ASSET_DETAILS}
+...    realestateDetails=${TEST_AUCTION_REALESTATE_DETAILS}
+...    attachments=${TEST_AUCTION_ATTACHMENTS}
+...    timing=${TEST_AUCTION_TIMING}
+...    financialInfo=${TEST_AUCTION_FINANCIAL_INFO}
+...    salesAgentDetails=${TEST_AUCTION_SALES_AGENT_DETAILS}
+...    additionalData=${TEST_AUCTION_ADDITIONAL_DATA}
+
+&{HAR_AUCTION_REALESTATE_DETAILS}
+...    auctionRegionId=2
+...    auctionCityId=227
+...    district=11
+...    googleMapUrl=${EMPTY}
+...    auctionRegionName=الجوف
+...    auctionCityName=طبرجل
+
+&{HAR_AUCTION_TIMING}
+...    startDate=10/21/2026
+...    startTime=01:00:00
+...    endDate=10/27/2026
+...    endTime=01:00:00
+
+&{HAR_AUCTION_FINANCIAL_INFO}
+...    calculateVatMethod=1
+...    estimatedPrice=11
+...    solvency=11
+...    startBidPrice=11
+...    minimumBidPrice=10
+
+&{HAR_AUCTION_MASTER_IMAGE}
+...    url=https://storage.googleapis.com/gcp-mazad-preprod/a98d39ed-d4da-40eb-884f-66793a886bb0
+...    fileId=a98d39ed-d4da-40eb-884f-66793a886bb0
+...    name=6760135001_58b1c5c5f0_b.jpg
+...    size=${102614}
+
+&{HAR_AUCTION_ATTACHMENTS}
+...    masterImage=${HAR_AUCTION_MASTER_IMAGE}
+...    additionalImages=${TEST_AUCTION_ADDITIONAL_IMAGES}
+...    brochure=${None}
+...    assetVideoUrl=${EMPTY}
+...    assetVideoFile=${None}
+
+&{HAR_AUCTION_PAYLOAD}
+...    mainInfo=${TEST_AUCTION_MAIN_INFO}
+...    assetDetails=${TEST_AUCTION_ASSET_DETAILS}
+...    realestateDetails=${HAR_AUCTION_REALESTATE_DETAILS}
+...    timing=${HAR_AUCTION_TIMING}
+...    financialInfo=${HAR_AUCTION_FINANCIAL_INFO}
+...    salesAgentDetails=${TEST_AUCTION_SALES_AGENT_DETAILS}
+...    attachments=${HAR_AUCTION_ATTACHMENTS}
+...    additionalData=${TEST_AUCTION_ADDITIONAL_DATA}
+
+${TEST_PAGE_TAKE_COUNT}    10
+${TEST_PAGE_SKIP_COUNT}    0
+&{TEST_OFFSET_PAGINATION_PAYLOAD}
+...    take=${TEST_PAGE_TAKE_COUNT}
+...    skip=${TEST_PAGE_SKIP_COUNT}
+...    filter=${EMPTY}
+...    sortBy=${EMPTY}
+...    ascending=${True}
