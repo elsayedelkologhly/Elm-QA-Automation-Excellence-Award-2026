@@ -10,9 +10,9 @@ ${waitingtime}    30s
 ${REMOTE_URL}                 http://127.0.0.1:4723/wd/hub
 ${PLATFORM_NAME}              Android
 #${UDID}                       R52N91EXAAH
-#${UDID}                        RZCWB0ER5TT
-${UDID}                        emulator-5554
-#${deviceName}                 SM-T875
+${UDID}                       RZCWB0ER5TT
+#${UDID}                        emulator-5554
+#${deviceName}                 adb:ANDROID
 ${deviceName}                 sdk_gphone64_x86_64
 ${APP_PACKAGE}                sa.thiqah.emazad
 ${APP_ACTIVITY}               .app.intro.view.activity.ConfigActivity
